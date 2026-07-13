@@ -1,0 +1,640 @@
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f4f7fb;
+  color: #222;
+}
+
+/* NAVBAR */
+
+.navbar {
+  width: 100%;
+  background: #0f172a;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  margin-left: 25px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  color: #38bdf8;
+}
+
+/* CONTAINER */
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 35px auto;
+}
+
+/* WELCOME */
+
+.welcome {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 35px;
+}
+
+/* USER CARDS */
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.card {
+  width: 280px;
+
+  background: white;
+
+  border-radius: 18px;
+
+  overflow: hidden;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+  transition: 0.3s;
+
+  text-align: center;
+
+  padding: 25px;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card img {
+  width: 140px;
+
+  height: 140px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  border: 4px solid #2563eb;
+
+  margin-bottom: 18px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: #666;
+
+  margin-bottom: 18px;
+}
+
+.card button {
+  background: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 8px;
+
+  padding: 10px 18px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.card button:hover {
+  background: #1d4ed8;
+}
+
+/* FORMS */
+
+form {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  padding: 12px;
+
+  margin-top: 8px;
+
+  margin-bottom: 20px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 8px;
+
+  font-size: 15px;
+}
+
+button {
+  background: #2563eb;
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 25px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+/* LOGIN PAGE */
+
+.login-page {
+  height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  background: linear-gradient(135deg, #2563eb, #1e293b);
+}
+
+.login-card {
+  width: 420px;
+
+  background: white;
+
+  padding: 40px;
+
+  border-radius: 18px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-card h1 {
+  text-align: center;
+
+  color: #2563eb;
+
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  text-align: center;
+
+  color: #666;
+
+  margin-bottom: 30px;
+}
+
+.login-card label {
+  font-weight: 600;
+}
+
+.login-card input {
+  width: 100%;
+}
+
+.login-card button {
+  width: 100%;
+
+  margin-top: 10px;
+}
+
+.bottom-text {
+  margin-top: 25px;
+
+  text-align: center;
+}
+
+.bottom-text a {
+  text-decoration: none;
+
+  color: #2563eb;
+
+  font-weight: bold;
+}
+
+/* REGISTER PAGE */
+
+.login-card {
+  width: 750px;
+
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.login-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.login-card::-webkit-scrollbar-thumb {
+  background: #2563eb;
+
+  border-radius: 20px;
+}
+
+select {
+  cursor: pointer;
+}
+.login-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.login-card::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 20px;
+}
+
+select {
+  cursor: pointer;
+}
+
+/* ========================= */
+/* REGISTER GRID */
+/* ========================= */
+
+.register-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 15px;
+}
+
+.register-grid .full {
+  grid-column: 1/3;
+}
+
+@media (max-width: 768px) {
+  .register-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .register-grid .full {
+    grid-column: auto;
+  }
+
+  .login-card {
+    width: 95%;
+  }
+}
+
+/* REGISTER PAGE */
+
+.register-container {
+  width: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px;
+}
+
+.tagline {
+  text-align: center;
+
+  color: #555;
+
+  font-size: 18px;
+
+  margin-top: 10px;
+
+  margin-bottom: 30px;
+}
+
+/* PROFILE */
+
+/* ================= PROFILE CARD ================= */
+
+.profile-card {
+  width: 90%;
+  max-width: 760px;
+  background: #fff;
+  margin: 25px auto;
+  padding: 22px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+/* ================= PROFILE IMAGE ================= */
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #3465eb;
+  margin-bottom: 12px;
+}
+
+/* ================= NAME ================= */
+
+.profile-card h2 {
+  font-size: 38px;
+  color: #222;
+  margin: 8px 0;
+  font-weight: 700;
+}
+
+/* ================= ROLE ================= */
+
+.role {
+  display: inline-block;
+  background: #3465eb;
+  color: white;
+  padding: 8px 22px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+/* ================= GRID ================= */
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 18px;
+}
+
+/* ================= INFO BOX ================= */
+
+.profile-section {
+  background: #f7f9ff;
+  padding: 16px;
+  border-radius: 15px;
+  transition: 0.3s;
+}
+
+.profile-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.profile-section h3 {
+  color: #3465eb;
+  margin-bottom: 8px;
+  font-size: 28px;
+}
+
+.profile-section p {
+  color: #444;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+/* ================= SOCIAL ================= */
+
+.social-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.social-buttons button {
+  background: #3465eb;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 26px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-buttons button:hover {
+  background: #274fc4;
+  transform: translateY(-2px);
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+  .profile-card {
+    width: 95%;
+    padding: 18px;
+  }
+
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-card h2 {
+    font-size: 30px;
+  }
+
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* EDIT PROFILE */
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.edit-profile-photo {
+  width: 120px;
+
+  height: 120px;
+
+  border-radius: 50%;
+
+  object-fit: cover;
+
+  display: block;
+
+  margin-bottom: 15px;
+
+  border: 4px solid #3465eb;
+}
+
+textarea {
+  resize: none;
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SEARCH PAGE */
+
+.search-box {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  margin-bottom: 35px;
+
+  text-align: center;
+}
+
+.search-box h2 {
+  margin-bottom: 10px;
+}
+
+.search-box p {
+  color: #666;
+
+  margin-bottom: 20px;
+}
+
+.search-box form {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+.search-box input {
+  width: 400px;
+}
+
+.role-badge {
+  display: inline-block;
+
+  background: #3465eb;
+
+  color: white;
+
+  padding: 6px 18px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  margin: 10px 0;
+} /* SEARCH PAGE */
+
+.search-box {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+  margin-bottom: 35px;
+
+  text-align: center;
+}
+
+.search-box h2 {
+  margin-bottom: 10px;
+}
+
+.search-box p {
+  color: #666;
+
+  margin-bottom: 20px;
+}
+
+.search-box form {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+.search-box input {
+  width: 400px;
+}
+
+.role-badge {
+  display: inline-block;
+
+  background: #3465eb;
+
+  color: white;
+
+  padding: 6px 18px;
+
+  border-radius: 20px;
+
+  font-size: 14px;
+
+  margin: 10px 0;
+}
