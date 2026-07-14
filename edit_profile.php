@@ -7,25 +7,41 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 include("includes/db.php");
+$success = false;
+$error = false;
 $user_id = $_SESSION['user_id'];
-
-$sql = "SELECT * FROM profiles WHERE user_id='$user_id'";
+$sql = "SELECT users.full_name,
+               users.email,
+               users.role,
+               profiles.*
+        FROM users
+        LEFT JOIN profiles
+        ON users.id = profiles.user_id
+        WHERE users.id='$user_id'";
 $result = mysqli_query($conn, $sql);
 
 $profile = mysqli_fetch_assoc($result);
 if($profile == null){
 
-    $profile = [
-        "bio" => "",
-        "age" => "",
-        "gender" => "",
-        "experience" => "",
-        "skills" => "",
-        "languages" => "",
-        "instagram" => "",
-        "youtube" => "",
-        "profile_photo" => ""
-    ];
+ $profile = [
+
+    "full_name" => "",
+    "email" => "",
+    "role" => "",
+
+    "bio" => "",
+    "age" => "",
+    "gender" => "",
+    "experience" => "",
+    "skills" => "",
+    "languages" => "",
+    "instagram" => "",
+    "youtube" => "",
+    "profile_photo" => "",
+    "phone" => "",
+    "city" => ""
+
+];
 
 }
 
@@ -41,6 +57,8 @@ $skills = $_POST['skills'];
 $languages = $_POST['languages'];
 $instagram = $_POST['instagram'];
 $youtube = $_POST['youtube'];
+$phone = $_POST['phone'];
+$city = $_POST['city'];
 
 $photo_name = $_FILES['profile_photo']['name'];
 $photo_tmp = $_FILES['profile_photo']['tmp_name'];
@@ -75,35 +93,37 @@ if(mysqli_num_rows($check_result) > 0){
             languages='$languages',
             instagram='$instagram',
             youtube='$youtube',
-            profile_photo='$photo_name'
+            profile_photo='$photo_name',
+            phone='$phone',
+            city='$city'
             WHERE user_id='$user_id'";
 
 }else{
 
     // INSERT New Profile
     $sql = "INSERT INTO profiles
-    (user_id, bio, age, gender, experience, skills, languages, instagram, youtube, profile_photo)
-
-    VALUES
-    ('$user_id',
-    '$bio',
-    '$age',
-    '$gender',
-    '$experience',
-    '$skills',
-    '$languages',
-    '$instagram',
-    '$youtube',
-    '$photo_name')";
+(user_id, bio, age, gender, experience, skills, languages, instagram, youtube, profile_photo, phone, city)
+VALUES
+('$user_id',
+'$bio',
+'$age',
+'$gender',
+'$experience',
+'$skills',
+'$languages',
+'$instagram',
+'$youtube',
+'$photo_name',
+'$phone',
+'$city')";
 }
 
 // Execute Query
 if(mysqli_query($conn, $sql)){
-    echo "<h2 style='color:green;'>Profile Saved Successfully! 🎉</h2>";
+    $success = true;
 }else{
-    echo "<h2 style='color:red;'>Error Saving Profile!</h2>";
+    $error = true;
 }
-
 
 
     // echo "<h2 style='color:green;'>Profile Form Submitted Successfully! 🎉</h2>";
@@ -127,6 +147,7 @@ if(mysqli_query($conn, $sql)){
 <head>
     <title>Edit Profile - CinePaalam</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -226,7 +247,21 @@ Female
 Other
 </option>
 
+
 </select>
+<label>Phone Number</label><br>
+<input type="text"
+       name="phone"
+       value="<?php echo $profile['phone']; ?>">
+
+<br><br>
+
+<label>City</label><br>
+<input type="text"
+       name="city"
+       value="<?php echo $profile['city']; ?>">
+
+<br><br>
 
 </div>
 
@@ -291,6 +326,31 @@ placeholder="https://www.youtube.com/@channel">
 </div>
 
 </div>
+<?php if($success){ ?>
+
+<script>
+Swal.fire({
+    icon: 'success',
+    title: 'Profile Saved!',
+    text: 'Your profile has been updated successfully.',
+    timer: 2000,
+    showConfirmButton: false
+});
+</script>
+
+<?php } ?>
+
+<?php if($error){ ?>
+
+<script>
+Swal.fire({
+    icon: 'error',
+    title: 'Oops!',
+    text: 'Something went wrong!',
+});
+</script>
+
+<?php } ?>
 
 </body>
 

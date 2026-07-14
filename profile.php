@@ -18,18 +18,32 @@ if(isset($_GET['id'])){
     $user_id = $_SESSION['user_id'];
 
 }
-
 $sql = "SELECT users.full_name,
                users.role,
                profiles.*
         FROM users
-        INNER JOIN profiles
+        LEFT JOIN profiles
         ON users.id = profiles.user_id
         WHERE users.id='$user_id'";
 
 $result = mysqli_query($conn, $sql);
 
 $profile = mysqli_fetch_assoc($result);
+if(!$profile){
+
+    die("User not found.");
+
+}
+
+// Default values if profile is empty
+
+$profile['profile_photo'] = $profile['profile_photo'] ?? "";
+$profile['bio'] = $profile['bio'] ?: "No bio added yet.";
+$profile['experience'] = $profile['experience'] ?: "No experience added.";
+$profile['skills'] = $profile['skills'] ?: "No skills added.";
+$profile['languages'] = $profile['languages'] ?: "Not specified.";
+$profile['instagram'] = $profile['instagram'] ?: "#";
+$profile['youtube'] = $profile['youtube'] ?: "#";
 
 ?>
 
@@ -41,6 +55,7 @@ $profile = mysqli_fetch_assoc($result);
     <title>Profile - CinePaalam</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -69,7 +84,21 @@ $profile = mysqli_fetch_assoc($result);
 
     <div class="profile-card">
 
-        <img src="uploads/<?php echo $profile['profile_photo']; ?>" class="profile-img">
+     <?php
+if(!empty($profile['profile_photo'])){
+?>
+
+<img src="uploads/<?php echo $profile['profile_photo']; ?>" class="profile-img">
+
+<?php
+}else{
+?>
+
+<img src="images/default.png" class="profile-img">
+
+<?php
+}
+?>
 
         <h2><?php echo $profile['full_name']; ?></h2>
 
