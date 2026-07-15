@@ -59,6 +59,20 @@ $instagram = $_POST['instagram'];
 $youtube = $_POST['youtube'];
 $phone = $_POST['phone'];
 $city = $_POST['city'];
+if(!preg_match('/^[6-9][0-9]{9}$/', $phone)){
+
+    echo "
+    <script>
+    Swal.fire({
+        icon:'error',
+        title:'Invalid Phone Number',
+        text:'Phone number must contain exactly 10 digits and start with 6, 7, 8, or 9.'
+    });
+    </script>";
+
+    exit();
+}
+
 
 $photo_name = $_FILES['profile_photo']['name'];
 $photo_tmp = $_FILES['profile_photo']['tmp_name'];
@@ -181,10 +195,10 @@ if(mysqli_query($conn, $sql)){
 <div>
 
 <label>Bio</label>
-
+s
 <textarea
 name="bio"
-rows="5"
+rows="6"
 placeholder="Tell people about yourself..."
 required><?php echo $profile['bio']; ?></textarea>
 
@@ -232,36 +246,45 @@ required>
 
 <option value="">-- Select Gender --</option>
 
-<option value="Male"
-<?php if($profile['gender']=="Male") echo "selected"; ?>>
+<option value="Male" <?php if($profile['gender']=="Male") echo "selected"; ?>>
 Male
 </option>
 
-<option value="Female"
-<?php if($profile['gender']=="Female") echo "selected"; ?>>
+<option value="Female" <?php if($profile['gender']=="Female") echo "selected"; ?>>
 Female
 </option>
 
-<option value="Other"
-<?php if($profile['gender']=="Other") echo "selected"; ?>>
+<option value="Other" <?php if($profile['gender']=="Other") echo "selected"; ?>>
 Other
 </option>
 
-
 </select>
-<label>Phone Number</label><br>
-<input type="text"
-       name="phone"
-       value="<?php echo $profile['phone']; ?>">
 
-<br><br>
+</div>
 
-<label>City</label><br>
-<input type="text"
-       name="city"
-       value="<?php echo $profile['city']; ?>">
+<div>
 
-<br><br>
+<label>Phone Number</label>
+
+<input
+type="text"
+name="phone"
+value="<?php echo $profile['phone']; ?>"
+maxlength="10"
+pattern="[6-9][0-9]{9}"
+title="Enter a valid 10-digit Indian phone number"
+required>
+
+</div>
+
+<div>
+
+<label>City</label>
+
+<input
+type="text"
+name="city"
+value="<?php echo $profile['city']; ?>">
 
 </div>
 

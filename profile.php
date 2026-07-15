@@ -18,21 +18,57 @@ if(isset($_GET['id'])){
     $user_id = $_SESSION['user_id'];
 
 }
+
 $sql = "SELECT users.full_name,
-               users.role,
-               profiles.*
-        FROM users
-        LEFT JOIN profiles
-        ON users.id = profiles.user_id
-        WHERE users.id='$user_id'";
+       users.role,
+       users.phone,
+       users.city,
+       profiles.*
+FROM users
+LEFT JOIN profiles
+ON users.id = profiles.user_id
+WHERE users.id='$user_id'";
 
 $result = mysqli_query($conn, $sql);
 
 $profile = mysqli_fetch_assoc($result);
-if(!$profile){
 
-    die("User not found.");
+$profile_completion = 0;
 
+if (!empty($profile['profile_photo'])) {
+    $profile_completion += 15;
+}
+
+if (!empty($profile['bio'])) {
+    $profile_completion += 15;
+}
+
+if (!empty($profile['experience'])) {
+    $profile_completion += 15;
+}
+
+if (!empty($profile['skills'])) {
+    $profile_completion += 15;
+}
+
+if (!empty($profile['languages'])) {
+    $profile_completion += 10;
+}
+
+if (!empty($profile['instagram']) && $profile['instagram'] != "#") {
+    $profile_completion += 10;
+}
+
+if (!empty($profile['youtube']) && $profile['youtube'] != "#") {
+    $profile_completion += 10;
+}
+
+if (!empty($profile['phone'])) {
+    $profile_completion += 5;
+}
+
+if (!empty($profile['city'])) {
+    $profile_completion += 5;
 }
 
 // Default values if profile is empty
@@ -99,10 +135,69 @@ if(!empty($profile['profile_photo'])){
 <?php
 }
 ?>
+<?php
+$isOwner = ($user_id == $_SESSION['user_id']);
+?>
 
-        <h2><?php echo $profile['full_name']; ?></h2>
+<h2><?php echo $profile['full_name']; ?></h2>
 
-        <p class="role"><?php echo $profile['role']; ?></p>
+<p class="role"><?php echo $profile['role']; ?></p>
+
+<?php if($isOwner && $profile_completion < 100){ ?>
+
+<h3 style="margin-top:15px;">
+    Profile Completion: <?php echo $profile_completion; ?>%
+</h3>
+
+
+
+<p class="progress-text">
+    <?php echo $profile_completion; ?>% Completed
+</p>
+<?php
+
+
+
+$missing = [];
+
+if(empty($profile['profile_photo'])) $missing[] = "📷 Profile Photo";
+if(empty($profile['bio'])) $missing[] = "📝 Bio";
+if(empty($profile['experience'])) $missing[] = "🎬 Experience";
+if(empty($profile['skills'])) $missing[] = "⭐ Skills";
+if(empty($profile['languages'])) $missing[] = "🌍 Languages";
+if(empty($profile['instagram']) || $profile['instagram'] == "#"){
+    $missing[] = "📷 Instagram";
+}
+
+if(empty($profile['youtube']) || $profile['youtube'] == "#"){
+    $missing[] = "▶ YouTube";
+}
+if(empty($profile['phone'])) $missing[] = "📞 Phone";
+if(empty($profile['city'])) $missing[] = "📍 City";
+
+if(count($missing) > 0){
+?>
+
+<div class="missing-fields">
+
+    <h4>Complete these to reach 100%</h4>
+
+    <ul>
+
+    <?php
+    foreach($missing as $item){
+        echo "<li>$item</li>";
+    }
+    ?>
+
+    </ul>
+
+</div>
+
+<?php
+}
+?>
+<?php } ?>
 
         <hr>
 
