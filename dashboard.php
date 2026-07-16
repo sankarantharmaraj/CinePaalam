@@ -8,6 +8,19 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 include("includes/db.php");
+$nav_user = $_SESSION['user_id'];
+
+$nav_sql = "SELECT users.full_name,
+                   users.role,
+                   profiles.profile_photo
+            FROM users
+            LEFT JOIN profiles
+            ON users.id = profiles.user_id
+            WHERE users.id='$nav_user'";
+
+$nav_result = mysqli_query($conn, $nav_sql);
+
+$nav = mysqli_fetch_assoc($nav_result);
 
 ?>
 <!DOCTYPE html>
@@ -20,21 +33,7 @@ include("includes/db.php");
 
 <body>
 
-<div class="navbar">
-
-    <div class="logo">
-        🎬 CinePaalam
-    </div>
-
-    <div class="menu">
-        <a href="dashboard.php">Home</a>
-        <a href="profile.php">My Profile</a>
-        <a href="search.php">Search</a>
-        <a href="edit_profile.php">Edit Profile</a>
-        <a href="logout.php">Logout</a>
-    </div>
-
-</div>
+  <?php include("includes/navbar.php"); ?>
 
 <div class="container">
 

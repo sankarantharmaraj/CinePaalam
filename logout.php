@@ -1,15 +1,40 @@
 <?php
-
 session_start();
 
-// Remove all session variables
+// Remove session
 session_unset();
-
-// Destroy the session
 session_destroy();
-
-// Redirect to login page
-header("Location: login.php");
-exit();
-
 ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Logging Out...</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body>
+
+<script>
+
+Swal.fire({
+    icon: 'success',
+    title: 'Logged Out!',
+    text: 'Thanks for using CinePaalam 🎬',
+    timer: 2000,
+    showConfirmButton: false
+}).then(() => {
+
+    window.location.href = "login.php";
+
+});
+
+</script>
+
+</body>
+
+</html>

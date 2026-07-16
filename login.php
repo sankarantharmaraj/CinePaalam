@@ -3,14 +3,20 @@
 session_start();
 include("includes/db.php");
 
+$error = false;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $sql);
+  $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE email=?");
 
+mysqli_stmt_bind_param($stmt, "s", $email);
+
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
     if (mysqli_num_rows($result) > 0) {
 
         $user = mysqli_fetch_assoc($result);
@@ -28,13 +34,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         } else {
 
-            echo "<h2 style='color:red;'>Incorrect Password ❌</h2>";
+            $error = true;
 
         }
 
     } else {
 
-        echo "<h2 style='color:red;'>Email Not Found ❌</h2>";
+        $error = true;
 
     }
 
@@ -48,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <title>Login - CinePaalam</title>
     <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -82,7 +89,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </div>
+<?php if($error){ ?>
 
+<script>
+
+Swal.fire({
+    icon: 'error',
+    title: 'Login Failed',
+    text: 'Invalid email or password.'
+});
+
+</script>
+
+<?php } ?>
 
 
 </body>

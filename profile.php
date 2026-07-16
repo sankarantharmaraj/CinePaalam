@@ -97,23 +97,7 @@ $profile['youtube'] = $profile['youtube'] ?: "#";
 
 <body>
 
-<div class="navbar">
-
-    <div class="logo">
-        🎬 CinePaalam
-    </div>
-
-    <div class="menu">
-
-        <a href="dashboard.php">Home</a>
-        <a href="profile.php">My Profile</a>
-        <a href="search.php">Search</a>
-        <a href="edit_profile.php">Edit Profile</a>
-        <a href="logout.php">Logout</a>
-
-    </div>
-
-</div>
+  <?php include("includes/navbar.php"); ?>
 
 
 <div class="container">

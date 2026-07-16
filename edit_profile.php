@@ -166,20 +166,7 @@ if(mysqli_query($conn, $sql)){
 
 <body>
 
-<div class="navbar">
-
-    <div class="logo">
-        🎬 CinePaalam
-    </div>
-
-    <div class="menu">
-        <a href="index.php">Home</a>
-        <a href="profile.php">My Profile</a>
-        <a href="search.php">Search</a>
-        <a href="logout.php">Logout</a>
-    </div>
-
-</div>
+  <?php include("includes/navbar.php"); ?>
 
 <div class="container">
 
