@@ -33,6 +33,49 @@ if(isset($_GET['max_age'])){
 }
 
 ?>
+<?php
+
+$where = [];
+
+if($search != ""){
+    $where[] = "(users.full_name LIKE '%$search%'
+          OR users.role LIKE '%$search%'
+          OR profiles.city LIKE '%$search%')";
+}
+
+if($city != ""){
+    $where[] = "profiles.city LIKE '%$city%'";
+}
+
+if($min_age != ""){
+    $where[] = "profiles.age >= '$min_age'";
+}
+
+if($max_age != ""){
+    $where[] = "profiles.age <= '$max_age'";
+}
+
+$sql = "SELECT users.id,
+               users.full_name,
+               users.role,
+               profiles.city,
+               profiles.profile_photo,
+               profiles.age
+        FROM users
+        LEFT JOIN profiles
+        ON users.id = profiles.user_id";
+
+if(count($where) > 0){
+    $sql .= " WHERE " . implode(" AND ", $where);
+}
+
+$result = mysqli_query($conn, $sql);
+if(!$result){
+    die(mysqli_error($conn));
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html>
@@ -55,90 +98,104 @@ if(isset($_GET['max_age'])){
 
 <div class="container">
 
-    <div class="search-box">
+  <h1 class="search-title">🎬 Discover Cinema Talent</h1>
 
-        <h2>🔍 Find Cinema Talents</h2>
+    <p class="search-subtitle">
+        Find actors, directors, singers and other cinema professionals.
+    </p>
 
-        <p>Search by Name, Role or City</p>
+   
+        <div class="search-box">
 
-        <form method="GET">
 
-           <input
-    type="text"
-    name="search"
-    placeholder="Search actors, directors, singers..."
-    value="<?php echo $search; ?>">
 
-<div class="filter-grid">
+    <form method="GET">
 
-    <input
-        type="text"
-        name="city"
-        placeholder="City"
-        value="<?php echo $city; ?>">
+        <input
+            type="text"
+            name="search"
+            class="main-search"
+            placeholder="Search by Name or Role..."
+            value="<?php echo $search; ?>">
 
-    <input
-        type="number"
-        name="min_age"
-        placeholder="Min Age"
-        value="<?php echo $min_age; ?>">
+        <div class="filter-row">
 
-    <input
-        type="number"
-        name="max_age"
-        placeholder="Max Age"
-        value="<?php echo $max_age; ?>">
+            <input
+                type="text"
+                name="city"
+                placeholder="📍 City"
+                value="<?php echo $city; ?>">
+
+            <input
+                type="number"
+                name="min_age"
+                placeholder="🎂 Min Age"
+                value="<?php echo $min_age; ?>">
+
+          
+<form method="GET">
+
+<input
+type="text"
+name="search"
+class="main-search"
+placeholder="🔍 Search by Name or Role..."
+value="<?php echo $search; ?>">
+
+<div class="filter-row">
+
+<input
+type="text"
+name="city"
+placeholder="📍 City"
+value="<?php echo $city; ?>">
+
+<input
+type="number"
+name="min_age"
+placeholder="Min Age"
+value="<?php echo $min_age; ?>">
+
+<input
+type="number"
+name="max_age"
+placeholder="Max Age"
+value="<?php echo $max_age; ?>">
 
 </div>
 
+<div class="search-buttons">
+
 <button type="submit">
-    Search
+🔍 Search
 </button>
 
-        </form>
+<a href="search.php" class="clear-btn">
+↺ Clear
+</a>
 
-    </div>
+</div>
 
-    <div class="card-container">
+</form>
+        
+
+</div>
+
+<h3 class="result-count">
+
+<?php echo mysqli_num_rows($result); ?>
+
+Talents Found
+
+</h3>
+
+<div class="card-container">
+
+    
 
 <?php
 
 
-$where = [];
-
-if($search != ""){
-    $where[] = "(users.full_name LIKE '%$search%'
-              OR users.role LIKE '%$search%'
-              OR users.city LIKE '%$search%')";
-}
-
-if($city != ""){
-    $where[] = "users.city LIKE '%$city%'";
-}
-
-if($min_age != ""){
-    $where[] = "profiles.age >= '$min_age'";
-}
-
-if($max_age != ""){
-    $where[] = "profiles.age <= '$max_age'";
-}
-
-$sql = "SELECT users.id,
-               users.full_name,
-               users.role,
-               users.city,
-               profiles.profile_photo,
-               profiles.age
-        FROM users
-        LEFT JOIN profiles
-        ON users.id = profiles.user_id";
-
-if(count($where) > 0){
-    $sql .= " WHERE " . implode(" AND ", $where);
-}
-
-$result = mysqli_query($conn, $sql);
 
 if(mysqli_num_rows($result) > 0){
 

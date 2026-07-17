@@ -533,116 +533,6 @@ textarea {
   }
 }
 
-/* SEARCH PAGE */
-
-.search-box {
-  background: white;
-
-  padding: 30px;
-
-  border-radius: 20px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-  margin-bottom: 35px;
-
-  text-align: center;
-}
-
-.search-box h2 {
-  margin-bottom: 10px;
-}
-
-.search-box p {
-  color: #666;
-
-  margin-bottom: 20px;
-}
-
-.search-box form {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 15px;
-
-  flex-wrap: wrap;
-}
-
-.search-box input {
-  width: 400px;
-}
-
-.role-badge {
-  display: inline-block;
-
-  background: #3465eb;
-
-  color: white;
-
-  padding: 6px 18px;
-
-  border-radius: 20px;
-
-  font-size: 14px;
-
-  margin: 10px 0;
-} /* SEARCH PAGE */
-
-.search-box {
-  background: white;
-
-  padding: 30px;
-
-  border-radius: 20px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-
-  margin-bottom: 35px;
-
-  text-align: center;
-}
-
-.search-box h2 {
-  margin-bottom: 10px;
-}
-
-.search-box p {
-  color: #666;
-
-  margin-bottom: 20px;
-}
-
-.search-box form {
-  display: flex;
-
-  justify-content: center;
-
-  gap: 15px;
-
-  flex-wrap: wrap;
-}
-
-.search-box input {
-  width: 400px;
-}
-
-.role-badge {
-  display: inline-block;
-
-  background: #3465eb;
-
-  color: white;
-
-  padding: 6px 18px;
-
-  border-radius: 20px;
-
-  font-size: 14px;
-
-  margin: 10px 0;
-}
-
 /* PROFILE DROPDOWN */
 
 .profile-dropdown {
@@ -696,4 +586,73 @@ textarea {
   padding: 12px 15px;
   text-decoration: none;
   color: #333;
+}
+
+/* ===== SEARCH PAGE V2 ===== */
+
+.search-title {
+  text-align: center;
+  font-size: 38px;
+  margin-bottom: 10px;
+}
+
+.search-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 35px;
+}
+/* ===== NEW SEARCH PAGE ===== */
+
+.search-box {
+  max-width: 900px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.main-search {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.filter-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-row input {
+  width: 220px;
+}
+
+.search-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.clear-btn {
+  padding: 12px 22px;
+  background: #f1f1f1;
+  color: #333;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.clear-btn:hover {
+  background: #ddd;
+}
+
+.result-count {
+  text-align: center;
+  margin: 25px 0;
+  font-size: 22px;
+  font-weight: 600;
 }
