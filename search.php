@@ -9,6 +9,7 @@ if (!isset($_SESSION['user_name'])) {
 
 include("includes/db.php");
 
+
 $search = "";
 
 if(isset($_GET['search'])){
@@ -132,37 +133,12 @@ if(!$result){
                 placeholder="🎂 Min Age"
                 value="<?php echo $min_age; ?>">
 
-          
-<form method="GET">
-
-<input
-type="text"
-name="search"
-class="main-search"
-placeholder="🔍 Search by Name or Role..."
-value="<?php echo $search; ?>">
-
-<div class="filter-row">
-
-<input
-type="text"
-name="city"
-placeholder="📍 City"
-value="<?php echo $city; ?>">
-
-<input
-type="number"
-name="min_age"
-placeholder="Min Age"
-value="<?php echo $min_age; ?>">
-
-<input
-type="number"
-name="max_age"
-placeholder="Max Age"
-value="<?php echo $max_age; ?>">
-
-</div>
+          <input
+    type="number"
+    name="max_age"
+    placeholder="🎂 Max Age"
+    value="<?php echo $max_age; ?>">
+    </div>
 
 <div class="search-buttons">
 
@@ -177,6 +153,7 @@ value="<?php echo $max_age; ?>">
 </div>
 
 </form>
+
         
 
 </div>
