@@ -118,3 +118,11 @@ function confirmLogout(){
 }
 
 </script>
+<form class="navbar-search" action="search.php" method="GET">
+    <input
+        type="text"
+        name="search"
+        placeholder="Search talents...">
+
+    <button type="submit">🔍</button>
+</form>

@@ -656,3 +656,26 @@ textarea {
   font-size: 22px;
   font-weight: 600;
 }
+
+.navbar-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 25px;
+}
+
+.navbar-search input {
+  width: 250px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
+}
+
+.navbar-search button {
+  border: none;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+}
