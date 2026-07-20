@@ -20,18 +20,18 @@ $city = "";
 if(isset($_GET['city'])){
     $city = $_GET['city'];
 }
+$role = "";
 
-$min_age = "";
-
-if(isset($_GET['min_age'])){
-    $min_age = $_GET['min_age'];
+if(isset($_GET['role'])){
+    $role = $_GET['role'];
 }
 
-$max_age = "";
+$age = "";
 
-if(isset($_GET['max_age'])){
-    $max_age = $_GET['max_age'];
+if(isset($_GET['age'])){
+    $age = $_GET['age'];
 }
+
 
 ?>
 <?php
@@ -47,13 +47,18 @@ if($search != ""){
 if($city != ""){
     $where[] = "profiles.city LIKE '%$city%'";
 }
-
-if($min_age != ""){
-    $where[] = "profiles.age >= '$min_age'";
+if($role != ""){
+    $where[] = "users.role = '$role'";
 }
 
-if($max_age != ""){
-    $where[] = "profiles.age <= '$max_age'";
+if($age != ""){
+
+    $range = explode("-", $age);
+
+    $min = $range[0];
+    $max = $range[1];
+
+    $where[] = "profiles.age BETWEEN $min AND $max";
 }
 
 $sql = "SELECT users.id,
@@ -104,57 +109,6 @@ if(!$result){
     <p class="search-subtitle">
         Find actors, directors, singers and other cinema professionals.
     </p>
-
-   
-        <div class="search-box">
-
-
-
-    <form method="GET">
-
-        <input
-            type="text"
-            name="search"
-            class="main-search"
-            placeholder="Search by Name or Role..."
-            value="<?php echo $search; ?>">
-
-        <div class="filter-row">
-
-            <input
-                type="text"
-                name="city"
-                placeholder="📍 City"
-                value="<?php echo $city; ?>">
-
-            <input
-                type="number"
-                name="min_age"
-                placeholder="🎂 Min Age"
-                value="<?php echo $min_age; ?>">
-
-          <input
-    type="number"
-    name="max_age"
-    placeholder="🎂 Max Age"
-    value="<?php echo $max_age; ?>">
-    </div>
-
-<div class="search-buttons">
-
-<button type="submit">
-🔍 Search
-</button>
-
-<a href="search.php" class="clear-btn">
-↺ Clear
-</a>
-
-</div>
-
-</form>
-
-        
 
 </div>
 

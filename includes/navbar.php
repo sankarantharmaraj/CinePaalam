@@ -16,20 +16,74 @@ $nav = mysqli_fetch_assoc($nav_result);
 
 ?>
 
+
 <div class="navbar">
 
     <div class="logo">
         🎬 CinePaalam
     </div>
 
+    <div class="nav-center">
+
+       <form action="search.php" method="GET" class="nav-search-form">
+
+<input
+type="text"
+name="search"
+placeholder="🔍 Search Talent..."
+value="<?php echo isset($_GET['search']) ? $_GET['search'] : ''; ?>">
+
+<select name="role">
+<option value="">All Roles</option>
+<option>Actor</option>
+<option>Director</option>
+<option>Singer</option>
+<option>Dancer</option>
+<option>Music Director</option>
+<option>Cinematographer</option>
+<option>Editor</option>
+<option>Producer</option>
+<option>Writer</option>
+</select>
+
+<select name="city">
+<option value="">All Cities</option>
+<option>Chennai</option>
+<option>Coimbatore</option>
+<option>Madurai</option>
+<option>Salem</option>
+<option>Trichy</option>
+<option>Erode</option>
+</select>
+
+<select name="age">
+
+<option value="">All Ages</option>
+
+<option value="18-25">18 - 25</option>
+
+<option value="26-35">26 - 35</option>
+
+<option value="36-45">36 - 45</option>
+
+<option value="46-55">46 - 55</option>
+
+<option value="56-100">56+</option>
+
+</select>
+
+<button type="submit">🔍</button>
+
+</form>
+
+    </div>
+
     <div class="menu">
 
         <a href="index.php">Home</a>
 
-        <a href="search.php">Search</a>
 
-        <div class="profile-dropdown">
-
+<div class="profile-dropdown">
 <?php
 if(!empty($nav['profile_photo'])){
 ?>
@@ -118,11 +172,3 @@ function confirmLogout(){
 }
 
 </script>
-<form class="navbar-search" action="search.php" method="GET">
-    <input
-        type="text"
-        name="search"
-        placeholder="Search talents...">
-
-    <button type="submit">🔍</button>
-</form>

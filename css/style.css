@@ -679,3 +679,83 @@ textarea {
   height: 42px;
   cursor: pointer;
 }
+
+.nav-search-form {
+  display: flex;
+  align-items: center;
+
+  background: #fff;
+
+  border-radius: 35px;
+
+  overflow: hidden;
+
+  width: 760px;
+
+  height: 48px;
+
+  margin-right: 30px;
+}
+
+.nav-search-form input {
+  flex: 0 0 260px;
+  border: none;
+  outline: none;
+  padding: 0 18px;
+  font-size: 15px;
+}
+
+.nav-search-form select {
+  border: none;
+
+  outline: none;
+
+  padding: 0 15px;
+
+  height: 48px;
+
+  background: #fff;
+
+  border-left: 1px solid #eee;
+
+  cursor: pointer;
+  width: 150px;
+  flex: none;
+}
+
+.nav-search-form button {
+  width: 70px; /* was 55px */
+  height: 100px;
+  border: none;
+  background: #2db8ea;
+  color: #fff;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+
+  padding-right: 8px; /* moves icon slightly left */
+}
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: #11182d;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin-left: 60px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}

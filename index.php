@@ -33,9 +33,7 @@ $nav = mysqli_fetch_assoc($nav_result);
 </head>
 
 <body>
-    <?php include("includes/navbar.php"); ?>
-
-
+   <?php include("includes/navbar.php"); ?>
 
 
 <div class="container">
