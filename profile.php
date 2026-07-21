@@ -8,6 +8,32 @@ if (!isset($_SESSION['user_name'])) {
 }
 
 include("includes/db.php");
+if(isset($_POST['follow'])){
+
+    $follower = $_SESSION['user_id'];
+    $following = $_GET['id'];
+
+    mysqli_query($conn,"INSERT INTO follows(follower_id, following_id)
+    VALUES('$follower','$following')");
+
+    header("Location: profile.php?id=".$following);
+    exit();
+
+}
+
+if(isset($_POST['unfollow'])){
+
+    $follower = $_SESSION['user_id'];
+    $following = $_GET['id'];
+
+    mysqli_query($conn,"DELETE FROM follows
+    WHERE follower_id='$follower'
+    AND following_id='$following'");
+
+    header("Location: profile.php?id=".$following);
+    exit();
+
+}
 
 if(isset($_GET['id'])){
 
@@ -32,6 +58,21 @@ WHERE users.id='$user_id'";
 $result = mysqli_query($conn, $sql);
 
 $profile = mysqli_fetch_assoc($result);
+// Followers count
+$followersQuery = mysqli_query($conn,
+"SELECT COUNT(*) AS total
+FROM follows
+WHERE following_id='$user_id'");
+
+$followers = mysqli_fetch_assoc($followersQuery)['total'];
+
+// Following count
+$followingQuery = mysqli_query($conn,
+"SELECT COUNT(*) AS total
+FROM follows
+WHERE follower_id='$user_id'");
+
+$following = mysqli_fetch_assoc($followingQuery)['total'];
 
 $profile_completion = 0;
 
@@ -121,11 +162,60 @@ if(!empty($profile['profile_photo'])){
 ?>
 <?php
 $isOwner = ($user_id == $_SESSION['user_id']);
+$isFollowing = false;
+
+if (!$isOwner) {
+
+    $loggedInUser = $_SESSION['user_id'];
+
+    $checkFollow = mysqli_query($conn,
+        "SELECT * FROM follows
+         WHERE follower_id='$loggedInUser'
+         AND following_id='$user_id'");
+
+    if (mysqli_num_rows($checkFollow) > 0) {
+        $isFollowing = true;
+    }
+}
 ?>
 
 <h2><?php echo $profile['full_name']; ?></h2>
+<?php if(!$isOwner){ ?>
+
+<form method="POST">
+
+<?php if($isFollowing){ ?>
+
+<button type="submit" name="unfollow" class="follow-btn">
+    Unfollow
+</button>
+
+<?php } else { ?>
+
+<button type="submit" name="follow" class="follow-btn">
+    Follow
+</button>
+
+<?php } ?>
+
+</form>
+
+<?php } ?>
 
 <p class="role"><?php echo $profile['role']; ?></p>
+<div class="follow-stats">
+
+    <span>
+        <strong><?php echo $followers; ?></strong><br>
+        Followers
+    </span>
+
+    <span>
+        <strong><?php echo $following; ?></strong><br>
+        Following
+    </span>
+
+</div>
 
 <?php if($isOwner && $profile_completion < 100){ ?>
 
