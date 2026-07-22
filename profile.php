@@ -179,8 +179,12 @@ if (!$isOwner) {
 }
 ?>
 
+
 <h2><?php echo $profile['full_name']; ?></h2>
+<p class="role"><?php echo $profile['role']; ?></p>
 <?php if(!$isOwner){ ?>
+
+<div class="profile-actions">
 
 <form method="POST">
 
@@ -200,9 +204,21 @@ if (!$isOwner) {
 
 </form>
 
+<a href="chat.php?id=<?php echo $user_id; ?>">
+
+<button class="message-btn">
+    💬 Message
+</button>
+
+</a>
+
+</div>
+
 <?php } ?>
 
-<p class="role"><?php echo $profile['role']; ?></p>
+
+
+
 <div class="follow-stats">
 
     <span>
